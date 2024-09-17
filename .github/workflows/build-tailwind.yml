@@ -1,0 +1,33 @@
+name: Build Tailwind CSS
+
+on:
+  # Run this workflow on every push to the main branch (adjust the branch as necessary)
+  push:
+    branches:
+      - main
+  # You can also run this on pull requests if needed
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js (version 14 as per your buildspec.yml)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # Step 3: Install NPM dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Build the CSS using Tailwind
+      - name: Build Tailwind CSS
+        run: npx tailwindcss -i assets/css/input.css -o assets/css/output.css --minify
+

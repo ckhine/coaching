@@ -1,0 +1,26 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+    commands:
+      # - 'npm install -g tailwindcss@latest'  # Installing TailwindCSS globally
+      - 'npm install'
+      # Add any other installation commands if required
+  
+  build:
+    commands:
+      - 'echo "Building using TailwindCSS..."'
+      - 'npx tailwindcss -i assets/css/input.css -o assets/css/output.css --minify'
+      # Add any other build commands if required
+
+  post_build:
+    commands:
+      - 'echo "Listing current directory:"'
+      - 'ls -al'
+      - 'rm -rf .git README.md templates node_modules tailwind.conf.js'
+      - 'echo "Build completed, preparing artifacts for the next stage..."'
+
+artifacts:
+  files:
+    - '**/**'
