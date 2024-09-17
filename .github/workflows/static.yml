@@ -4,7 +4,7 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+    branches: ["github-pages"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -29,15 +29,30 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Setup node
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      # Step 2: Checkout code
       - name: Checkout
         uses: actions/checkout@v4
+      # Step 3: Install NPM dependencies
+      - name: Install dependencies
+        run: npm install
+      # Step 4: Build the CSS using Tailwind
+      - name: Build Tailwind CSS
+        run: npx tailwindcss -i assets/css/input.css -o assets/css/output.css --minify
+      # Step 5: Setup pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      # Step 6: Upload artifact
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
           path: '.'
+      # Step 7: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
