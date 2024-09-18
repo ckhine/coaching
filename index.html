@@ -19,26 +19,32 @@
   </head>
 
 <body class="bg-gray-200 h-screen flex flex-col" x-data="{ showModal: false }">
+  
   <!-- ========== HEADER ========== -->
-  <header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-[#000000] border-b border-gray-200 text-sm py-6 dark:bg-gray-800 dark:border-gray-700">
-      <nav class="max-w-[120rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" aria-label="Global" hx-get="/v1/header" hx-trigger="load">
-      </nav>
+  <header class="sticky top-0 z-50 w-full h-[48px] bg-black border-b border-gray-200">
+    <nav class="max-w-[120rem] w-full mx-auto px-4 flex items-center justify-between sm:px-6 lg:px-8" aria-label="Global">
+      <!-- Add your nav content here -->
+      <a href="#" class="text-white">Home</a>
+      <a href="#" class="text-white">About</a>
+      <a href="#" class="text-white">Contact</a>
+    </nav>
   </header>
   <!-- ========== END HEADER ========== -->
 
   <!-- ========== MAIN CONTENT ========== -->
-  <main id="content" role="main" class="shrink-0">
-    <div class="max-w-[115rem] mx-auto py-0 px-0 sm:px-0 lg:px-0">
-      <div class="grid grid-cols-1 lg:grid-cols-10 gap-8">
+  <main id="content" role="main" class="flex-grow">
+    <div class="max-w-[115rem] mx-auto py-0 px-0 sm:px-0 lg:px-0 h-[calc(100vh-80px)]">
+      <!-- Grid with flexible left column and fixed right column -->
+      <div class="grid grid-cols-1 lg:grid-cols-[auto_300px] gap-8 h-full">
         
-        <!-- Left Column (70%) -->
-        <div class="lg:col-span-7">
+        <!-- Left Column (Expandable) -->
+        <div class="lg:col-span-1">
           <!-- Page Heading -->
           <header class="max-w-3xl">
             <p class="mb-2 text-sm font-semibold text-blue-600">Starter Pages &amp; Examples</p>
             <h1 class="block text-2xl font-bold text-gray-800 sm:text-3xl dark:text-white">Sticky Footer &amp; Header using Tailwind CSS</h1>
             <p class="mt-2 text-lg text-gray-800 dark:text-gray-400">Attach a navbar to the top and a footer to the bottom of the viewport using Tailwind CSS.</p>
-  
+
             <div class="mt-5 flex flex-col items-center gap-2 sm:flex-row sm:gap-3">
               <a class="w-full sm:w-auto inline-flex justify-center items-center gap-x-3 text-center bg-blue-600 hover:bg-blue-700 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800" href="https://github.com/htmlstreamofficial/preline/tree/main/examples/html" target="_blank">
                 Get the source code
@@ -50,26 +56,44 @@
           </header>
           <!-- End Page Heading -->
         </div>
-  
-        <!-- Right Column (30%) -->
-        <div class="lg:col-span-3 flex justify-end items-start transform -translate-y-[2px]">
-          <!-- SVG Logo aligned to the top right -->
-          <img src="assets/images/cyrus.svg" alt="Cyrus SVG" class="w-[300px] h-[300px]" />
+
+        <!-- Right Column (Fixed at 300px width) with black background and sticky positioning -->
+        <div class="w-[300px] flex flex-col bg-black sticky top-[48px] h-[calc(100vh-48px)]">
+          
+          <!-- First Row (SVG Row) -->
+          <div class="flex justify-center items-center bg-gray-100 h-[300px] border-t border-r border-black">
+            <!-- SVG Logo fitting the first row -->
+            <img src="assets/images/cyrus.svg" alt="Cyrus SVG" class="w-full h-full object-contain" />
+          </div>
+          
+
+          <!-- Second Row Filling Remaining Space Split into Two Columns -->
+          <div class="flex-grow flex">
+            <!-- First Column (150px) -->
+            <div class="w-[150px] bg-gray-200 flex justify-center items-center">
+              <!-- Content for the first column -->
+              <p class="text-center text-gray-700">First Column</p>
+            </div>
+
+            <!-- Second Column (150px) with black background -->
+            <div class="w-[150px] bg-black flex justify-center items-center">
+              <!-- Content for the second column -->
+              <p class="text-center text-white">Second Column</p>
+            </div>
+          </div>
+
         </div>
-        
-  
+
       </div>
     </div>
   </main>
-  
   <!-- ========== END MAIN CONTENT ========== -->
 
+
   <!-- ========== FOOTER ========== -->
-  <footer class="mt-auto py-3 bg-[#000000]">
-    <nav class="max-w-[120rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" aria-label="Global" hx-get="/v1/footer" hx-trigger="load" hx-indicator="#loadingFooter">
-      <div id="footer" hx-target="#footer" hx-swap="outerHTML">
-        <div id="loadingFooter">Loading footer...</div>
-      </div>
+  <footer class="sticky bottom-0 z-50 w-full h-[32px] bg-black">
+    <nav class="max-w-[120rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" aria-label="Global">
+      <p class="text-center text-white">Sticky Footer</p>
     </nav>
   </footer>
   <!-- ========== END FOOTER ========== -->
